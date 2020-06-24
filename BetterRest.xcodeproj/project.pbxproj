@@ -13,6 +13,7 @@
 		1B98C22E24A3C2A300F71A18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B98C22D24A3C2A300F71A18 /* Assets.xcassets */; };
 		1B98C23124A3C2A300F71A18 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B98C23024A3C2A300F71A18 /* Preview Assets.xcassets */; };
 		1B98C23424A3C2A300F71A18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B98C23224A3C2A300F71A18 /* LaunchScreen.storyboard */; };
+		1B98C23F24A3D66200F71A18 /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1B98C23E24A3D66200F71A18 /* SleepCalculator.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		1B98C23324A3C2A300F71A18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B98C23524A3C2A300F71A18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B98C23B24A3CBDD00F71A18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1B98C23E24A3D66200F71A18 /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				1B98C22D24A3C2A300F71A18 /* Assets.xcassets */,
 				1B98C23224A3C2A300F71A18 /* LaunchScreen.storyboard */,
 				1B98C23524A3C2A300F71A18 /* Info.plist */,
+				1B98C23E24A3D66200F71A18 /* SleepCalculator.mlmodel */,
 				1B98C22F24A3C2A300F71A18 /* Preview Content */,
 			);
 			path = BetterRest;
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B98C22824A3C2A000F71A18 /* AppDelegate.swift in Sources */,
+				1B98C23F24A3D66200F71A18 /* SleepCalculator.mlmodel in Sources */,
 				1B98C22A24A3C2A000F71A18 /* SceneDelegate.swift in Sources */,
 				1B98C22C24A3C2A000F71A18 /* ContentView.swift in Sources */,
 			);
