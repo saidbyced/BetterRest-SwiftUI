@@ -24,6 +24,7 @@
 		1B98C23024A3C2A300F71A18 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B98C23324A3C2A300F71A18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B98C23524A3C2A300F71A18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B98C23B24A3CBDD00F71A18 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +41,7 @@
 		1B98C21B24A3C2A000F71A18 = {
 			isa = PBXGroup;
 			children = (
+				1B98C23B24A3CBDD00F71A18 /* README.md */,
 				1B98C22624A3C2A000F71A18 /* BetterRest */,
 				1B98C22524A3C2A000F71A18 /* Products */,
 			);
