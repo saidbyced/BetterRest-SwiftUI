@@ -10,9 +10,18 @@ import SwiftUI
 
 struct ContentView: View {
     
+    // MARK: -
+    // MARK: State variables
     @State private var wakeUp = Date()
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
+    
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    @State private var showCalculationAlert = false
+    
+    // MARK: -
+    // MARK: View body
     
     var body: some View {
         NavigationView {
@@ -36,14 +45,45 @@ struct ContentView: View {
                     Text("Calculate")
                 }
             )
+            .alert(isPresented: $showCalculationAlert) {
+                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
     }
     
-    func calculateBedtime() {
+    // MARK: -
+    // MARK: Methods
+    
+    private func calculateBedtime() {
+        let model = SleepCalculator()
+        let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
         
+        // Get current hour in seconds
+        let hour = (components.hour ?? 0) * 60 * 60
+        // Get current minute in seconds
+        let minute = (components.minute ?? 0) * 60
+        
+        do {
+            let prediction = try model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: Double(coffeeAmount))
+            let sleepTime = wakeUp - prediction.actualSleep
+            
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+            
+            alertTitle = "Your ideal bedtime is..."
+            alertMessage = formatter.string(from: sleepTime)
+            showCalculationAlert = true
+        } catch {
+            alertTitle = "Error"
+            alertMessage = "Sorry, there was a problem calculating your bedtime."
+            showCalculationAlert = true
+        }
     }
     
 }
+
+// MARK: -
+// MARK: Preview
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
