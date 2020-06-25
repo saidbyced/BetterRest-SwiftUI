@@ -10,9 +10,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // MARK: -
     // MARK: State variables
-    @State private var wakeUp = Date()
+    
+    @State private var wakeUp = defaultWakeTime
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
     
@@ -20,38 +20,61 @@ struct ContentView: View {
     @State private var alertMessage = ""
     @State private var showCalculationAlert = false
     
-    // MARK: -
+    // MARK: Computed variables
+    
+    static var defaultWakeTime: Date {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? Date()
+    }
+    
+    
     // MARK: View body
     
     var body: some View {
         NavigationView {
             VStack {
-                Text("When do you want to wake up?")
-                    .font(.headline)
-                DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                    .labelsHidden()
-                Text("Desired amount of sleep")
-                Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
-                    Text("\(sleepAmount, specifier: "%g") hours")
+                Form {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("When do you want to wake up?")
+                            .font(.headline)
+                        DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                        .datePickerStyle(WheelDatePickerStyle())
+                    }
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Desired amount of sleep")
+                            .font(.headline)
+                        Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
+                            Text("\(sleepAmount, specifier: "%g") hours")
+                        }
+                    }
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Daily coffee intake")
+                            .font(.headline)
+                        Stepper(value: $coffeeAmount, in: 1...20) {
+                            Text("\(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups")")
+                        }
+                    }
                 }
-                Text("Daily coffee intake")
-                Stepper(value: $coffeeAmount, in: 1...20) {
-                    Text("\(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups")")
+                .navigationBarTitle("BetterRest")
+                .navigationBarItems(trailing:
+                    Button(action: calculateBedtime) {
+                        Text("Calculate")
+                    }
+                )
+                .alert(isPresented: $showCalculationAlert) {
+                    Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                 }
-            }
-            .navigationBarTitle("BetterRest")
-            .navigationBarItems(trailing:
-                Button(action: calculateBedtime) {
-                    Text("Calculate")
-                }
-            )
-            .alert(isPresented: $showCalculationAlert) {
-                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                Text("\(alertTitle) \(alertMessage)")
+                    .font(.caption)
+                    .padding(10)
             }
         }
     }
     
-    // MARK: -
+    
     // MARK: Methods
     
     private func calculateBedtime() {
@@ -70,14 +93,16 @@ struct ContentView: View {
             let formatter = DateFormatter()
             formatter.timeStyle = .short
             
-            alertTitle = "Your ideal bedtime is..."
+            alertTitle = "Your ideal bedtime is"
             alertMessage = formatter.string(from: sleepTime)
             showCalculationAlert = true
         } catch {
             alertTitle = "Error"
             alertMessage = "Sorry, there was a problem calculating your bedtime."
-            showCalculationAlert = true
         }
+        
+        showCalculationAlert = true
+        
     }
     
 }
